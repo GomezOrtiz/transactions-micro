@@ -4,7 +4,7 @@ public final class TransactionMother {
 
     public static Transaction create(
             TransactionReference reference, TransactionStatus status,
-            TransactionAccountIban accountIban, TransactionDate date,
+            TransactionIban accountIban, TransactionDate date,
             TransactionAmount amount, TransactionFee fee,
             TransactionDescription description
     ) {

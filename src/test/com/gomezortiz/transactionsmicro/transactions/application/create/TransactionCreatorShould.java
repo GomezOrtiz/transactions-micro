@@ -1,10 +1,16 @@
 package com.gomezortiz.transactionsmicro.transactions.application.create;
 
-import com.gomezortiz.transactionsmicro.accounts.application.findBalance.AccountBalanceFinder;
+import com.gomezortiz.transactionsmicro.accounts.application.find.AccountFinder;
+import com.gomezortiz.transactionsmicro.accounts.application.update.AccountUpdater;
+import com.gomezortiz.transactionsmicro.accounts.domain.model.Account;
+import com.gomezortiz.transactionsmicro.accounts.domain.model.AccountBalance;
+import com.gomezortiz.transactionsmicro.accounts.domain.model.AccountMother;
+import com.gomezortiz.transactionsmicro.accounts.domain.repository.AccountRepository;
 import com.gomezortiz.transactionsmicro.shared.domain.model.DoubleMother;
-import com.gomezortiz.transactionsmicro.transactions.domain.exception.TransactionNotValidException;
 import com.gomezortiz.transactionsmicro.transactions.domain.model.Transaction;
-import com.gomezortiz.transactionsmicro.transactions.domain.model.TransactionAccountIban;
+import com.gomezortiz.transactionsmicro.transactions.domain.model.TransactionAccountIbanMother;
+import com.gomezortiz.transactionsmicro.transactions.domain.model.TransactionIban;
+import com.gomezortiz.transactionsmicro.transactions.domain.model.TransactionStatus;
 import com.gomezortiz.transactionsmicro.transactions.domain.repository.TransactionRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -12,18 +18,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest(classes = TransactionCreator.class)
+@SpringBootTest(classes = {TransactionCreator.class, AccountFinder.class, AccountUpdater.class})
 public class TransactionCreatorShould {
 
     @MockBean
     TransactionRepository repository;
 
     @MockBean
-    AccountBalanceFinder finder;
+    AccountRepository accountRepository;
 
     @Autowired
     TransactionCreator creator;
@@ -33,16 +40,17 @@ public class TransactionCreatorShould {
 
         // GIVEN
         TransactionCreateRequest request = TransactionCreateRequestMother.random(true, true,"ES");
-        when(finder.findByIban(new TransactionAccountIban(request.accountIban()))).thenReturn(request.amount() * 2);
+        Account account = AccountMother.withBalance("ES", Math.abs(request.amount()) * 2);
+        when(accountRepository.findByIban(TransactionAccountIbanMother.create(request.accountIban()))).thenReturn(Optional.of(account));
 
         // WHEN
         creator.create(request);
 
         // THEN
+        verify(accountRepository, times(1)).updateBalance(eq(account.iban()), any(AccountBalance.class));
         ArgumentCaptor<Transaction> transactionCaptor = ArgumentCaptor.forClass(Transaction.class);
         verify(repository, times(1)).create(transactionCaptor.capture());
-        Transaction createdTransaction = transactionCaptor.getValue();
-        //TODO: Asserts for createdTransaction if needed
+        assertCreatedTransaction(request, transactionCaptor.getValue());
     }
 
     @Test
@@ -50,16 +58,17 @@ public class TransactionCreatorShould {
 
         // GIVEN
         TransactionCreateRequest request = TransactionCreateRequestMother.random(false, false, "ES");
-        when(finder.findByIban(new TransactionAccountIban(request.accountIban()))).thenReturn(DoubleMother.random(2, 0 ,1000));
+        Account account = AccountMother.random("ES");
+        when(accountRepository.findByIban(new TransactionIban(request.accountIban()))).thenReturn(Optional.of(account));
 
         // WHEN
         creator.create(request);
 
         // THEN
+        verify(accountRepository, times(1)).updateBalance(eq(account.iban()), any(AccountBalance.class));
         ArgumentCaptor<Transaction> transactionCaptor = ArgumentCaptor.forClass(Transaction.class);
         verify(repository, times(1)).create(transactionCaptor.capture());
-        Transaction createdTransaction = transactionCaptor.getValue();
-        //TODO: Asserts for createdTransaction if needed
+        assertCreatedTransaction(request, transactionCaptor.getValue());
     }
 
     @Test
@@ -67,9 +76,9 @@ public class TransactionCreatorShould {
 
         // GIVEN
         TransactionCreateRequest request = TransactionCreateRequestMother.random(true, true,"ES");
-        Double accountBalance = DoubleMother.random(2, 0, request.amount().intValue());
-        String expectedError = String.format("Transaction is not valid. Account balance %s is not enough to transfer %s", accountBalance, request.amount());
-        when(finder.findByIban(new TransactionAccountIban(request.accountIban()))).thenReturn(accountBalance);
+        Account account = AccountMother.withBalance("ES", DoubleMother.random(2, 0, Math.abs(request.amount().intValue())));
+        String expectedError = String.format("Transaction is not valid. Account balance %s is not enough to transfer %s", account.balance().value(), request.amount());
+        when(accountRepository.findByIban(new TransactionIban(request.accountIban()))).thenReturn(Optional.of(account));
 
         // WHEN
         Exception e = assertThrows(TransactionNotValidException.class, () -> {
@@ -94,5 +103,15 @@ public class TransactionCreatorShould {
         // THEN
         assertEquals(expectedError, e.getMessage(), "Error message should be the expected");
 
+    }
+
+    private void assertCreatedTransaction(TransactionCreateRequest expected, Transaction actual) {
+        assertNotNull(actual.reference(), "Reference should not be null");
+        assertEquals(expected.accountIban(), actual.accountIban().value(), "Account IBAN should be the expected");
+        assertEquals(TransactionStatus.PENDING, actual.status());
+        assertEquals(expected.amount(), actual.amount().value(), "Amount should be the expected");
+        assertEquals(expected.fee(), actual.fee().value(), "Fee should be the expected");
+        assertEquals(expected.description(), actual.description().value(), "Description should be the expected");
+        assertEquals(expected.date(), actual.date().value(), "Date should be the expected");
     }
 }

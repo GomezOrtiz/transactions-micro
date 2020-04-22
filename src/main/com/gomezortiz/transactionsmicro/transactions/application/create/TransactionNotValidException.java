@@ -1,4 +1,4 @@
-package com.gomezortiz.transactionsmicro.transactions.domain.exception;
+package com.gomezortiz.transactionsmicro.transactions.application.create;
 
 public final class TransactionNotValidException extends RuntimeException {
 

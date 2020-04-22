@@ -4,11 +4,11 @@ import com.gomezortiz.transactionsmicro.shared.domain.model.IbanMother;
 
 public final class TransactionAccountIbanMother {
 
-    public static TransactionAccountIban create(String value) {
-        return new TransactionAccountIban(value);
+    public static TransactionIban create(String value) {
+        return new TransactionIban(value);
     }
 
-    public static TransactionAccountIban random(String countryCode) {
+    public static TransactionIban random(String countryCode) {
         return create(IbanMother.random(countryCode));
     }
 }

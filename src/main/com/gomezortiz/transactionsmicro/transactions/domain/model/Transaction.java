@@ -15,7 +15,7 @@ public final class Transaction {
 
     private final TransactionReference reference;
     private final TransactionStatus status;
-    private final TransactionAccountIban accountIban;
+    private final TransactionIban accountIban;
     private final TransactionDate date;
     private final TransactionAmount amount;
     private final TransactionFee fee;

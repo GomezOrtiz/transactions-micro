@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Getter
 @Accessors(fluent = true)
@@ -31,9 +32,9 @@ public final class TransactionCreateRequest {
 
     public final Transaction toPendingTransaction()  {
         return new Transaction(
-                new TransactionReference(reference),
+                new TransactionReference(null != reference ? reference : UUID.randomUUID().toString()),
                 TransactionStatus.PENDING,
-                new TransactionAccountIban(accountIban),
+                new TransactionIban(accountIban),
                 new TransactionDate(date),
                 new TransactionAmount(amount),
                 new TransactionFee(fee),

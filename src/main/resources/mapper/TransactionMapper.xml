@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.gomezortiz.transactionsmicro.transactions.infrastructure.mybatis.mapper.MyBatisTransactionMapper">
+
+    <sql id="selectTransaction">
+        SELECT t.REFERENCE, t.ACCOUNT_IBAN, t.CREATED_DATE, t.AMOUNT, t.FEE, t.DESCRIPTION
+        FROM TRANSACTIONS t
+    </sql>
+
+    <sql id="byCriteria">
+        <where>
+            <if test="criteria != null">
+                <if test="criteria.iban != null and criteria.iban.value != ''">
+                    AND t.ACCOUNT_IBAN = #{criteria.iban.value}
+                </if>
+                <if test="criteria.reference != null and criteria.reference.value != ''">
+                    AND t.REFERENCE = #{criteria.reference.value}
+                </if>
+            </if>
+        </where>
+    </sql>
+
+    <select id="findByCriteria" parameterType="TransactionSearchCriteria" resultMap="transactionResultMap">
+        <include refid="selectTransaction" />
+        <include refid="byCriteria" />
+        <if test="criteria.orderBy != null and criteria.orderBy.value == 'amount'">
+            ORDER BY t.amount
+            <if test="criteria.orderType.value == 'asc'">
+                asc
+            </if>
+            <if test="criteria.orderType.value == 'desc'">
+                desc
+            </if>
+        </if>
+    </select>
+
+    <insert id="create">
+        INSERT INTO TRANSACTIONS(reference, account_iban, created_date, amount, fee, description)
+        VALUES(
+        #{transaction.reference.value},
+        #{transaction.accountIban.value},
+        #{transaction.date.value},
+        #{transaction.amount.value},
+        #{transaction.fee.value},
+        #{transaction.description.value}
+        )
+    </insert>
+
+    <resultMap id="transactionResultMap" type="Transaction">
+        <association property="reference" javaType="TransactionReference">
+            <constructor>
+                <arg column="reference" javaType="java.lang.String"></arg>
+            </constructor>
+        </association>
+        <association property="accountIban" javaType="TransactionIban">
+            <constructor>
+                <arg column="account_iban" javaType="java.lang.String"></arg>
+            </constructor>
+        </association>
+        <association property="date" javaType="TransactionDate">
+            <constructor>
+                <arg column="created_date" javaType="java.time.LocalDate"></arg>
+            </constructor>
+        </association>
+        <association property="amount" javaType="TransactionAmount">
+            <constructor>
+                <arg column="amount" javaType="java.lang.Double"></arg>
+            </constructor>
+        </association>
+        <association property="fee" javaType="TransactionFee">
+            <constructor>
+                <arg column="fee" javaType="java.lang.Double"></arg>
+            </constructor>
+        </association>
+        <association property="description" javaType="TransactionDescription">
+            <constructor>
+                <arg column="description" javaType="java.lang.String"></arg>
+            </constructor>
+        </association>
+    </resultMap>
+</mapper>

@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 public class CustomLocalDateDeserializer extends StdDeserializer<LocalDate> {
 
     private static final long serialVersionUID = 2504781663552217938L;
-    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy");
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSz");
 
     protected CustomLocalDateDeserializer() {
         super(LocalDate.class);

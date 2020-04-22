@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Accessors(fluent = true)
 @ToString
 @EqualsAndHashCode
-public abstract class Iban implements Serializable {
+public class Iban implements Serializable {
 
     protected final String value;
 

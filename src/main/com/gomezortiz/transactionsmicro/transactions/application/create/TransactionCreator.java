@@ -8,6 +8,7 @@ import com.gomezortiz.transactionsmicro.transactions.domain.model.Transaction;
 import com.gomezortiz.transactionsmicro.transactions.domain.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 @Service
@@ -18,6 +19,7 @@ public final class TransactionCreator {
     private final AccountFinder accountFinder;
     private final AccountUpdater accountUpdater;
 
+    @Transactional
     public void create(TransactionCreateRequest request) {
 
         Assert.notNull(request, "Transaction request cannot be empty");
@@ -41,7 +43,7 @@ public final class TransactionCreator {
     }
 
     private Double calculateBalanceAfterFee(Double amount, Double fee, Double balance) {
-        Double feeAmount = Math.abs(amount) * (fee / 100);
+        Double feeAmount = null != fee ? Math.abs(amount) * (fee / 100) : 0;
         return amount > 0 ? balance + amount - feeAmount : balance - Math.abs(amount) - feeAmount;
     }
 }

@@ -1,0 +1,35 @@
+# IN-MEMORY DATABASE
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: sa
+    driverClassName: org.h2.Driver
+
+# MYBATIS
+mybatis:
+  configuration:
+    cache-enabled: true
+    default-fetch-size: 100
+    default-statement-timeout: 3000
+    map-underscore-to-camel-case: true
+  type-aliases-package: com.gomezortiz.transactionsmicro.*.domain.*
+  type-handlers-package: com.gomezortiz.transactionsmicro.*.infrastructure.mybatis.handler
+  mapper-locations: mapper/*.xml
+
+# LOMBOK
+lombok:
+  equalsAndHashCode:
+    callSuper: call
+
+# LOGGING
+logging:
+  level:
+    org.springframework: WARN
+    com.gomezortiz.transactionsmicro: DEBUG
+    com.gomezortiz.transactionsmicro.transactions.infrastructure.mybatis.mapper: TRACE
+    com.gomezortiz.transactionsmicro.accounts.infrastructure.mybatis.mapper: TRACE

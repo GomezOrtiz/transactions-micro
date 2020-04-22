@@ -47,6 +47,8 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.1.1'
+	testImplementation 'org.flywaydb.flyway-test-extensions:flyway-spring-test:6.3.3'
 	testImplementation 'com.github.javafaker:javafaker:1.0.2'
 }
 

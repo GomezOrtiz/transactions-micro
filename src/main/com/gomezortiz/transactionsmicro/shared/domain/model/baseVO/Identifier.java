@@ -13,7 +13,7 @@ import java.util.UUID;
 @Accessors(fluent = true)
 @ToString
 @EqualsAndHashCode
-public abstract class Identifier implements Serializable {
+public class Identifier implements Serializable {
 
     protected final String value;
 

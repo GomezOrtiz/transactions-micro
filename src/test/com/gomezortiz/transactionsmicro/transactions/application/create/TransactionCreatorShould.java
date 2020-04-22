@@ -10,7 +10,6 @@ import com.gomezortiz.transactionsmicro.shared.domain.model.DoubleMother;
 import com.gomezortiz.transactionsmicro.transactions.domain.model.Transaction;
 import com.gomezortiz.transactionsmicro.transactions.domain.model.TransactionAccountIbanMother;
 import com.gomezortiz.transactionsmicro.transactions.domain.model.TransactionIban;
-import com.gomezortiz.transactionsmicro.transactions.domain.model.TransactionStatus;
 import com.gomezortiz.transactionsmicro.transactions.domain.repository.TransactionRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -108,7 +107,6 @@ public class TransactionCreatorShould {
     private void assertCreatedTransaction(TransactionCreateRequest expected, Transaction actual) {
         assertNotNull(actual.reference(), "Reference should not be null");
         assertEquals(expected.accountIban(), actual.accountIban().value(), "Account IBAN should be the expected");
-        assertEquals(TransactionStatus.PENDING, actual.status());
         assertEquals(expected.amount(), actual.amount().value(), "Amount should be the expected");
         assertEquals(expected.fee(), actual.fee().value(), "Fee should be the expected");
         assertEquals(expected.description(), actual.description().value(), "Description should be the expected");

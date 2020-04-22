@@ -14,7 +14,6 @@ import lombok.experimental.Accessors;
 public final class Transaction {
 
     private final TransactionReference reference;
-    private final TransactionStatus status;
     private final TransactionIban accountIban;
     private final TransactionDate date;
     private final TransactionAmount amount;

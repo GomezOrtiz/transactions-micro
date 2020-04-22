@@ -1,9 +1,9 @@
 package com.gomezortiz.transactionsmicro.transactions.domain.model;
 
-import com.gomezortiz.transactionsmicro.shared.domain.model.baseVO.StringVO;
-import lombok.AllArgsConstructor;
+import com.gomezortiz.transactionsmicro.shared.domain.model.baseVO.Identifier;
 
-@AllArgsConstructor
-public class TransactionReference extends StringVO {
-    //TODO: Validation in constructor
+public final class TransactionReference extends Identifier {
+    public TransactionReference(String value) {
+        super(value);
+    }
 }

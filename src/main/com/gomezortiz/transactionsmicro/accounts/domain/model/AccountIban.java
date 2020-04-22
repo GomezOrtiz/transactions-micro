@@ -1,4 +1,4 @@
-package com.gomezortiz.transactionsmicro.shared.domain.model.account;
+package com.gomezortiz.transactionsmicro.accounts.domain.model;
 
 import com.gomezortiz.transactionsmicro.transactions.domain.exception.IbanNotValidException;
 import lombok.*;

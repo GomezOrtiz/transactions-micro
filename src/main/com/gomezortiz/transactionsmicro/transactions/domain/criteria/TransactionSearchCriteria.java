@@ -1,8 +1,8 @@
 package com.gomezortiz.transactionsmicro.transactions.domain.criteria;
 
-import com.gomezortiz.transactionsmicro.shared.domain.model.criteria.Criteria;
-import com.gomezortiz.transactionsmicro.shared.domain.model.criteria.OrderBy;
-import com.gomezortiz.transactionsmicro.shared.domain.model.criteria.OrderType;
+import com.gomezortiz.transactionsmicro.shared.criteria.Criteria;
+import com.gomezortiz.transactionsmicro.shared.criteria.OrderBy;
+import com.gomezortiz.transactionsmicro.shared.criteria.OrderType;
 import com.gomezortiz.transactionsmicro.transactions.domain.model.*;
 import lombok.Builder;
 import lombok.Getter;

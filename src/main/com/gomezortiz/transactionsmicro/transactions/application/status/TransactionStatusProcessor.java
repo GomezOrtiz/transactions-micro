@@ -1,12 +1,5 @@
 package com.gomezortiz.transactionsmicro.transactions.application.status;
 
-import com.gomezortiz.transactionsmicro.accounts.application.find.AccountFinder;
-import com.gomezortiz.transactionsmicro.accounts.application.update.AccountUpdater;
-import com.gomezortiz.transactionsmicro.accounts.domain.model.Account;
-import com.gomezortiz.transactionsmicro.accounts.domain.model.AccountBalance;
-import com.gomezortiz.transactionsmicro.shared.domain.model.channel.Channel;
-import com.gomezortiz.transactionsmicro.transactions.application.create.TransactionCreateRequest;
-import com.gomezortiz.transactionsmicro.transactions.application.create.TransactionNotValidException;
 import com.gomezortiz.transactionsmicro.transactions.domain.criteria.TransactionSearchCriteria;
 import com.gomezortiz.transactionsmicro.transactions.domain.model.Transaction;
 import com.gomezortiz.transactionsmicro.transactions.domain.model.TransactionReference;
@@ -14,15 +7,15 @@ import com.gomezortiz.transactionsmicro.transactions.domain.model.TransactionSta
 import com.gomezortiz.transactionsmicro.transactions.domain.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.Collection;
 
 @Service
 @RequiredArgsConstructor
-public final class TransactionStatusProcessor {
+public class TransactionStatusProcessor {
 
     private final TransactionRepository repository;
 
@@ -84,10 +77,10 @@ public final class TransactionStatusProcessor {
         return status;
     }
 
-    private boolean isBeforeToday(LocalDate date) {
-        return date.atStartOfDay().isBefore(LocalDate.now().atStartOfDay());
+    private boolean isBeforeToday(OffsetDateTime date) {
+        return date.isBefore(OffsetDateTime.now());
     }
-    private boolean isAfterToday(LocalDate date) {
-        return date.atStartOfDay().isAfter(LocalDate.now().atStartOfDay());
+    private boolean isAfterToday(OffsetDateTime date) {
+        return date.isAfter(OffsetDateTime.now());
     }
 }

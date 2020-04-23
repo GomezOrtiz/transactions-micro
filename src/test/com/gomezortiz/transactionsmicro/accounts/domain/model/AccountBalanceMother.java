@@ -1,7 +1,6 @@
 package com.gomezortiz.transactionsmicro.accounts.domain.model;
 
-import com.gomezortiz.transactionsmicro.shared.domain.model.DoubleMother;
-import com.gomezortiz.transactionsmicro.transactions.domain.model.TransactionAmount;
+import com.gomezortiz.transactionsmicro.shared.domain.DoubleMother;
 
 public final class AccountBalanceMother {
 

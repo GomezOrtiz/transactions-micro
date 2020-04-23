@@ -6,7 +6,7 @@ import com.gomezortiz.transactionsmicro.accounts.domain.model.Account;
 import com.gomezortiz.transactionsmicro.accounts.domain.model.AccountBalance;
 import com.gomezortiz.transactionsmicro.accounts.domain.model.AccountMother;
 import com.gomezortiz.transactionsmicro.accounts.domain.repository.AccountRepository;
-import com.gomezortiz.transactionsmicro.shared.domain.model.DoubleMother;
+import com.gomezortiz.transactionsmicro.shared.domain.DoubleMother;
 import com.gomezortiz.transactionsmicro.transactions.domain.model.Transaction;
 import com.gomezortiz.transactionsmicro.transactions.domain.model.TransactionAccountIbanMother;
 import com.gomezortiz.transactionsmicro.transactions.domain.model.TransactionIban;

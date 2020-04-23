@@ -1,4 +1,4 @@
-package com.gomezortiz.transactionsmicro.shared.domain.model.criteria;
+package com.gomezortiz.transactionsmicro.shared.criteria;
 
 import lombok.*;
 import lombok.experimental.Accessors;

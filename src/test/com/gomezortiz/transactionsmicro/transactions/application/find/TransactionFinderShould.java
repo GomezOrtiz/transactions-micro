@@ -1,20 +1,8 @@
 package com.gomezortiz.transactionsmicro.transactions.application.find;
 
-import com.gomezortiz.transactionsmicro.accounts.application.find.AccountFinder;
-import com.gomezortiz.transactionsmicro.accounts.application.update.AccountUpdater;
-import com.gomezortiz.transactionsmicro.accounts.domain.model.Account;
-import com.gomezortiz.transactionsmicro.accounts.domain.model.AccountBalance;
-import com.gomezortiz.transactionsmicro.accounts.domain.model.AccountMother;
-import com.gomezortiz.transactionsmicro.accounts.domain.repository.AccountRepository;
-import com.gomezortiz.transactionsmicro.shared.domain.model.DoubleMother;
-import com.gomezortiz.transactionsmicro.shared.domain.model.criteria.OrderBy;
-import com.gomezortiz.transactionsmicro.shared.domain.model.criteria.OrderType;
-import com.gomezortiz.transactionsmicro.transactions.application.create.TransactionCreateRequest;
-import com.gomezortiz.transactionsmicro.transactions.application.create.TransactionCreateRequestMother;
-import com.gomezortiz.transactionsmicro.transactions.application.create.TransactionCreator;
-import com.gomezortiz.transactionsmicro.transactions.application.create.TransactionNotValidException;
+import com.gomezortiz.transactionsmicro.shared.criteria.OrderBy;
+import com.gomezortiz.transactionsmicro.shared.criteria.OrderType;
 import com.gomezortiz.transactionsmicro.transactions.domain.criteria.TransactionSearchCriteria;
-import com.gomezortiz.transactionsmicro.transactions.domain.model.Transaction;
 import com.gomezortiz.transactionsmicro.transactions.domain.model.TransactionAccountIbanMother;
 import com.gomezortiz.transactionsmicro.transactions.domain.model.TransactionIban;
 import com.gomezortiz.transactionsmicro.transactions.domain.repository.TransactionRepository;
@@ -23,8 +11,6 @@ import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;

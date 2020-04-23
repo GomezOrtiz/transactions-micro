@@ -1,4 +1,4 @@
-package com.gomezortiz.transactionsmicro.shared.domain.model;
+package com.gomezortiz.transactionsmicro.shared.domain;
 
 public final class IbanMother {
     public static String random(String countryCode) {

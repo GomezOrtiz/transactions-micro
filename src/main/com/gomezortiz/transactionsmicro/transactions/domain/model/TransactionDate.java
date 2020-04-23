@@ -1,11 +1,11 @@
 package com.gomezortiz.transactionsmicro.transactions.domain.model;
 
-import com.gomezortiz.transactionsmicro.shared.domain.model.baseVO.LocalDateVO;
+import com.gomezortiz.transactionsmicro.shared.baseVO.OffsetDateTimeVO;
 
-import java.time.LocalDate;
+import java.time.OffsetDateTime;
 
-public final class TransactionDate extends LocalDateVO {
-    public TransactionDate(LocalDate value) {
+public final class TransactionDate extends OffsetDateTimeVO {
+    public TransactionDate(OffsetDateTime value) {
         super(value);
     }
 }

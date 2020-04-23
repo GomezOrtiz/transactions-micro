@@ -1,4 +1,4 @@
-package com.gomezortiz.transactionsmicro.shared.domain.model.baseVO;
+package com.gomezortiz.transactionsmicro.shared.baseVO;
 
 import com.gomezortiz.transactionsmicro.transactions.domain.exception.IdNotValidException;
 import lombok.EqualsAndHashCode;
@@ -33,5 +33,7 @@ public class Identifier implements Serializable {
             throw new IdNotValidException(id, e);
         }
     }
+
+    private static final long serialVersionUID = -2712994381556068614L;
 }
 

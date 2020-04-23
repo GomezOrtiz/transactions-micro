@@ -13,7 +13,7 @@ import org.springframework.util.Assert;
 
 @Service
 @RequiredArgsConstructor
-public final class TransactionCreator {
+public class TransactionCreator {
 
     private final TransactionRepository repository;
     private final AccountFinder accountFinder;

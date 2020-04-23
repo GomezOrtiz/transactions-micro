@@ -1,6 +1,6 @@
 package com.gomezortiz.transactionsmicro.transactions.domain.model;
 
-import com.gomezortiz.transactionsmicro.shared.domain.model.IbanMother;
+import com.gomezortiz.transactionsmicro.shared.domain.IbanMother;
 
 public final class TransactionAccountIbanMother {
 

@@ -1,4 +1,4 @@
-package com.gomezortiz.transactionsmicro.shared.domain.model;
+package com.gomezortiz.transactionsmicro.shared.domain;
 
 import java.util.UUID;
 

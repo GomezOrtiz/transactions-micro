@@ -1,6 +1,6 @@
 package com.gomezortiz.transactionsmicro.transactions.domain.model;
 
-import com.gomezortiz.transactionsmicro.shared.domain.model.IdMother;
+import com.gomezortiz.transactionsmicro.shared.domain.IdMother;
 
 public final class TransactionReferenceMother {
 

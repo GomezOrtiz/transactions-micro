@@ -1,6 +1,6 @@
 package com.gomezortiz.transactionsmicro.accounts.domain.model;
 
-import com.gomezortiz.transactionsmicro.shared.domain.model.baseVO.Iban;
+import com.gomezortiz.transactionsmicro.shared.baseVO.Iban;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

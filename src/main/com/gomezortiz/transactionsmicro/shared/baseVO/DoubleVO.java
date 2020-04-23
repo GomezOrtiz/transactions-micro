@@ -1,4 +1,4 @@
-package com.gomezortiz.transactionsmicro.shared.domain.model.baseVO;
+package com.gomezortiz.transactionsmicro.shared.baseVO;
 
 import lombok.*;
 import lombok.experimental.Accessors;

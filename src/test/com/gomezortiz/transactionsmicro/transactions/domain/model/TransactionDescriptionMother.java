@@ -1,6 +1,6 @@
 package com.gomezortiz.transactionsmicro.transactions.domain.model;
 
-import com.gomezortiz.transactionsmicro.shared.domain.model.MotherCreator;
+import com.gomezortiz.transactionsmicro.shared.domain.MotherCreator;
 
 public final class TransactionDescriptionMother {
 

@@ -1,7 +1,7 @@
 package com.gomezortiz.transactionsmicro.transactions.infrastructure.mybatis;
 
-import com.gomezortiz.transactionsmicro.shared.domain.model.criteria.OrderBy;
-import com.gomezortiz.transactionsmicro.shared.domain.model.criteria.OrderType;
+import com.gomezortiz.transactionsmicro.shared.criteria.OrderBy;
+import com.gomezortiz.transactionsmicro.shared.criteria.OrderType;
 import com.gomezortiz.transactionsmicro.shared.infrastructure.InfrastructureTestCase;
 import com.gomezortiz.transactionsmicro.transactions.domain.criteria.TransactionSearchCriteria;
 import com.gomezortiz.transactionsmicro.transactions.domain.model.*;
@@ -16,7 +16,6 @@ import org.springframework.context.annotation.Import;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 
 @Import(MyBatisTransactionRepository.class)
 public class MyBatisTransactionRepositoryShould extends InfrastructureTestCase {

@@ -1,6 +1,6 @@
 package com.gomezortiz.transactionsmicro.transactions.domain.model;
 
-import com.gomezortiz.transactionsmicro.shared.domain.model.DoubleMother;
+import com.gomezortiz.transactionsmicro.shared.domain.DoubleMother;
 
 public final class TransactionFeeMother {
 

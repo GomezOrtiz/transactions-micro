@@ -1,4 +1,4 @@
-package com.gomezortiz.transactionsmicro.shared.domain.model.baseVO;
+package com.gomezortiz.transactionsmicro.shared.baseVO;
 
 import com.gomezortiz.transactionsmicro.transactions.domain.exception.IbanNotValidException;
 import lombok.*;
@@ -33,4 +33,6 @@ public class Iban implements Serializable {
             throw new IbanNotValidException(iban, e);
         }
     }
+
+    private static final long serialVersionUID = -7319794667186404548L;
 }

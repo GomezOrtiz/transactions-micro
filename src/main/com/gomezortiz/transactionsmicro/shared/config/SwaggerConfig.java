@@ -19,8 +19,7 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.gomezortiz.transactionsmicro.transactions.rest"))
-                .apis(RequestHandlerSelectors.basePackage("com.gomezortiz.transactionsmicro.accounts.rest"))
+                .apis(RequestHandlerSelectors.basePackage("com.gomezortiz.transactionsmicro"))
                 .paths(PathSelectors.ant("/api/**"))
                 .build()
                 .apiInfo(apiInfo());

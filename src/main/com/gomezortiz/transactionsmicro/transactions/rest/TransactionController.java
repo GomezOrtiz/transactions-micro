@@ -8,6 +8,7 @@ import com.gomezortiz.transactionsmicro.transactions.application.create.Transact
 import com.gomezortiz.transactionsmicro.transactions.application.find.TransactionFinder;
 import com.gomezortiz.transactionsmicro.transactions.application.status.Channel;
 import com.gomezortiz.transactionsmicro.transactions.application.status.TransactionStatusProcessor;
+import com.gomezortiz.transactionsmicro.transactions.application.status.TransactionStatusResponse;
 import com.gomezortiz.transactionsmicro.transactions.domain.model.Transaction;
 import com.gomezortiz.transactionsmicro.transactions.domain.model.TransactionIban;
 import com.gomezortiz.transactionsmicro.transactions.domain.model.TransactionReference;
@@ -29,7 +30,7 @@ public class TransactionController {
     private final TransactionStatusProcessor statusProcessor;
 
     @GetMapping("/find")
-    public ResponseEntity findByIban(
+    public ResponseEntity<Collection<TransactionResponse>> findByIban(
             @RequestParam String iban,
             @RequestParam(defaultValue = "amount") String orderBy,
             @RequestParam(defaultValue = "DESC") String orderType
@@ -42,7 +43,7 @@ public class TransactionController {
     }
 
     @GetMapping("/status")
-    public ResponseEntity checkStatus(
+    public ResponseEntity<TransactionStatusResponse> checkStatus(
             @RequestParam String reference,
             @RequestParam String channel
     ) {

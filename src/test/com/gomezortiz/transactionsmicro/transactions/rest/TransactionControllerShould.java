@@ -16,8 +16,8 @@ import com.gomezortiz.transactionsmicro.transactions.domain.model.*;
 import com.gomezortiz.transactionsmicro.transactions.domain.repository.TransactionRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 
@@ -28,7 +28,7 @@ import java.util.Collections;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-@Import(TransactionController.class)
+@WebMvcTest(controllers = TransactionController.class)
 public class TransactionControllerShould extends RestControllerTestCase {
 
     @MockBean

@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -52,7 +54,10 @@ public class MyBatisAccountRepositoryShould extends InfrastructureTestCase {
     void update_balance() {
 
         // GIVEN
-        AccountBalance newBalance = AccountBalanceMother.create(account.balance().value() + 50);
+        Double balance = BigDecimal.valueOf(account.balance().value() + 50)
+                .setScale(2, RoundingMode.HALF_UP)
+                .doubleValue();
+        AccountBalance newBalance = AccountBalanceMother.create(balance);
 
         // WHEN
         repository.updateBalance(account.iban(), newBalance);

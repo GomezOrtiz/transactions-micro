@@ -3,6 +3,7 @@ package com.gomezortiz.transactionsmicro.accounts.application.find;
 import com.gomezortiz.transactionsmicro.accounts.domain.model.Account;
 import com.gomezortiz.transactionsmicro.accounts.domain.model.AccountIban;
 import com.gomezortiz.transactionsmicro.accounts.domain.model.AccountIbanMother;
+import com.gomezortiz.transactionsmicro.accounts.domain.model.AccountMother;
 import com.gomezortiz.transactionsmicro.accounts.domain.repository.AccountRepository;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
@@ -28,13 +29,14 @@ public class AccountFinderShould {
     void should_find_by_iban() {
 
         // GIVEN
-        AccountIban iban = AccountIbanMother.random("ES");
+        Account account = AccountMother.random("ES");
+        when(repository.findByIban(account.iban())).thenReturn(Optional.of(account));
 
         // WHEN
-        Account account = finder.find(iban);
+        Account foundAccount = finder.find(account.iban());
 
         // THEN
-        verify(repository, times(1)).findByIban(iban);
+        verify(repository, times(1)).findByIban(account.iban());
     }
 
     @Test

@@ -14,6 +14,6 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode
 public final class Account {
 
-    private final Iban iban;
+    private final AccountIban iban;
     private final AccountBalance balance;
 }

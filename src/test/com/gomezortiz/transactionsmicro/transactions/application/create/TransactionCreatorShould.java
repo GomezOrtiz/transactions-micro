@@ -2,9 +2,7 @@ package com.gomezortiz.transactionsmicro.transactions.application.create;
 
 import com.gomezortiz.transactionsmicro.accounts.application.find.AccountFinder;
 import com.gomezortiz.transactionsmicro.accounts.application.update.AccountUpdater;
-import com.gomezortiz.transactionsmicro.accounts.domain.model.Account;
-import com.gomezortiz.transactionsmicro.accounts.domain.model.AccountBalance;
-import com.gomezortiz.transactionsmicro.accounts.domain.model.AccountMother;
+import com.gomezortiz.transactionsmicro.accounts.domain.model.*;
 import com.gomezortiz.transactionsmicro.accounts.domain.repository.AccountRepository;
 import com.gomezortiz.transactionsmicro.shared.domain.DoubleMother;
 import com.gomezortiz.transactionsmicro.transactions.domain.model.Transaction;
@@ -40,7 +38,7 @@ public class TransactionCreatorShould {
         // GIVEN
         TransactionCreateRequest request = TransactionCreateRequestMother.random(true, true,"ES");
         Account account = AccountMother.withBalance("ES", Math.abs(request.amount()) * 2);
-        when(accountRepository.findByIban(TransactionAccountIbanMother.create(request.accountIban()))).thenReturn(Optional.of(account));
+        when(accountRepository.findByIban(AccountIbanMother.create(request.accountIban()))).thenReturn(Optional.of(account));
 
         // WHEN
         creator.create(request);
@@ -58,7 +56,7 @@ public class TransactionCreatorShould {
         // GIVEN
         TransactionCreateRequest request = TransactionCreateRequestMother.random(false, false, "ES");
         Account account = AccountMother.random("ES");
-        when(accountRepository.findByIban(new TransactionIban(request.accountIban()))).thenReturn(Optional.of(account));
+        when(accountRepository.findByIban(new AccountIban(request.accountIban()))).thenReturn(Optional.of(account));
 
         // WHEN
         creator.create(request);
@@ -77,7 +75,7 @@ public class TransactionCreatorShould {
         TransactionCreateRequest request = TransactionCreateRequestMother.random(true, true,"ES");
         Account account = AccountMother.withBalance("ES", DoubleMother.random(2, 0, Math.abs(request.amount().intValue())));
         String expectedError = String.format("Transaction is not valid. Account balance %s is not enough to transfer %s", account.balance().value(), request.amount());
-        when(accountRepository.findByIban(new TransactionIban(request.accountIban()))).thenReturn(Optional.of(account));
+        when(accountRepository.findByIban(new AccountIban(request.accountIban()))).thenReturn(Optional.of(account));
 
         // WHEN
         Exception e = assertThrows(TransactionNotValidException.class, () -> {

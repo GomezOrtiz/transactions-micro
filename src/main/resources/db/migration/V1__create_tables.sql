@@ -6,3 +6,8 @@ CREATE TABLE transactions (
     created_date TIMESTAMP,
     description VARCHAR(255)
 );
+
+CREATE TABLE accounts (
+    iban VARCHAR(255) NOT NULL,
+    balance NUMERIC(19,2) NOT NULL
+)

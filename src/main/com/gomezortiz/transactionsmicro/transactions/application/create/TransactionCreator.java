@@ -4,6 +4,7 @@ import com.gomezortiz.transactionsmicro.accounts.application.find.AccountFinder;
 import com.gomezortiz.transactionsmicro.accounts.application.update.AccountUpdater;
 import com.gomezortiz.transactionsmicro.accounts.domain.model.Account;
 import com.gomezortiz.transactionsmicro.accounts.domain.model.AccountBalance;
+import com.gomezortiz.transactionsmicro.accounts.domain.model.AccountIban;
 import com.gomezortiz.transactionsmicro.transactions.domain.model.Transaction;
 import com.gomezortiz.transactionsmicro.transactions.domain.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ public class TransactionCreator {
         Assert.notNull(request, "Transaction request cannot be empty");
 
         Transaction transaction = request.toPendingTransaction();
-        Account account = accountFinder.find(transaction.accountIban());
+        Account account = accountFinder.find(new AccountIban(transaction.accountIban().value()));
 
         Double balance = calculateBalanceAfterFee(
                 transaction.amount().value(),

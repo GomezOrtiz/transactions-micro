@@ -60,7 +60,7 @@
         </association>
         <association property="date" javaType="TransactionDate">
             <constructor>
-                <arg column="created_date" javaType="java.time.LocalDate"></arg>
+                <arg column="created_date" javaType="java.time.OffsetDateTime"></arg>
             </constructor>
         </association>
         <association property="amount" javaType="TransactionAmount">

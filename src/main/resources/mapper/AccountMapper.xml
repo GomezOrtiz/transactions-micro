@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.gomezortiz.transactionsmicro.accounts.infrastructure.mybatis.mapper.MyBatisAccountMapper">
+
+    <sql id="selectAccount">
+        SELECT a.IBAN, a.BALANCE
+        FROM ACCOUNTS a
+    </sql>
+
+    <select id="findByIban" parameterType="AccountIban" resultMap="accountResultMap">
+        <include refid="selectAccount" />
+        WHERE a.IBAN = #{iban.value}
+    </select>
+
+    <update id="updateBalance">
+        UPDATE ACCOUNTS
+        <set>
+            <if test="balance != null and balance.value != ''">BALANCE = #{balance.value}</if>
+        </set>
+        WHERE IBAN = #{iban.value}
+    </update>
+
+    <insert id="create">
+        INSERT INTO ACCOUNTS(iban, balance)
+        VALUES(
+        #{account.iban.value},
+        #{account.balance.value}
+        )
+    </insert>
+
+    <resultMap id="accountResultMap" type="Account">
+        <association property="iban" javaType="AccountIban">
+            <constructor>
+                <arg column="iban" javaType="java.lang.String"></arg>
+            </constructor>
+        </association>
+        <association property="balance" javaType="AccountBalance">
+            <constructor>
+                <arg column="balance" javaType="java.lang.Double"></arg>
+            </constructor>
+        </association>
+    </resultMap>
+</mapper>

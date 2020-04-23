@@ -78,9 +78,9 @@ public class TransactionStatusProcessor {
     }
 
     private boolean isBeforeToday(OffsetDateTime date) {
-        return date.isBefore(OffsetDateTime.now());
+        return date.toLocalDate().atStartOfDay().isBefore(LocalDate.now().atStartOfDay());
     }
     private boolean isAfterToday(OffsetDateTime date) {
-        return date.isAfter(OffsetDateTime.now());
+        return date.toLocalDate().atStartOfDay().isAfter(LocalDate.now().atStartOfDay());
     }
 }

@@ -25,11 +25,3 @@ mybatis:
 lombok:
   equalsAndHashCode:
     callSuper: call
-
-# LOGGING
-logging:
-  level:
-    org.springframework: WARN
-    com.gomezortiz.transactionsmicro: DEBUG
-    com.gomezortiz.transactionsmicro.transactions.infrastructure.mybatis.mapper: TRACE
-    com.gomezortiz.transactionsmicro.accounts.infrastructure.mybatis.mapper: TRACE

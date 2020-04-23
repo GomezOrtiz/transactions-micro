@@ -12,6 +12,8 @@ Then, access this url from your browser:
 
 Then you can make requests to any endpoint as you wish, but be aware that valid accounts for transactions are limited. For testing purposes, you can check which accounts are valid to create a new transaction by making a GET request to /api/account/all endpoint.
 
+Also note that reference to create transaction, if present, must be a valid UUID in String format.
+
 So easy! :+1:
 
 What if didn't work? :scream: :scream: Don't panic. Try the following:

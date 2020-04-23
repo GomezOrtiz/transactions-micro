@@ -53,9 +53,9 @@ public class TransactionFinderShould {
         ArgumentCaptor<TransactionSearchCriteria> criteriaCaptor = ArgumentCaptor.forClass(TransactionSearchCriteria.class);
         verify(repository, times(1)).findByCriteria(criteriaCaptor.capture());
         TransactionSearchCriteria builtCriteria = criteriaCaptor.getValue();
-        assertEquals(iban , builtCriteria.iban(), "El IBAN del objeto criteria debería ser el esperado");
-        assertEquals(orderBy, builtCriteria.orderBy(), "El orderBy del objeto criteria debería ser el esperado");
-        assertEquals(orderType, builtCriteria.orderType(), "El orderType del objeto criteria debería ser el esperado");
+        assertEquals(iban , builtCriteria.iban(), "Criteria IBAN should be the expected");
+        assertEquals(orderBy, builtCriteria.orderBy(), "Criteria OrderBy should be the expected");
+        assertEquals(orderType, builtCriteria.orderType(), "Criteria orderType should be the expected");
     }
 
     @Test

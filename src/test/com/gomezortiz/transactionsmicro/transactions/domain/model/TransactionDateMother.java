@@ -11,4 +11,10 @@ public final class TransactionDateMother {
     public static TransactionDate now() {
         return create(LocalDate.now());
     }
+    public static TransactionDate yesterday() {
+        return create(LocalDate.now().minusDays(1));
+    }
+    public static TransactionDate tomorrow() {
+        return create(LocalDate.now().plusDays(1));
+    }
 }

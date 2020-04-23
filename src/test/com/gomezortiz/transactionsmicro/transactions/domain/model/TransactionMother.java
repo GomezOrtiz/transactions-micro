@@ -28,4 +28,22 @@ public final class TransactionMother {
                 TransactionDescriptionMother.random()
         );
     }
+
+    public static Transaction beforeToday() {
+        return create(
+                TransactionReferenceMother.random(),
+                TransactionAccountIbanMother.random("ES"), TransactionDateMother.yesterday(),
+                TransactionAmountMother.random(10,1000), TransactionFeeMother.create(3.18),
+                TransactionDescriptionMother.random()
+        );
+    }
+
+    public static Transaction afterToday() {
+        return create(
+                TransactionReferenceMother.random(),
+                TransactionAccountIbanMother.random("ES"), TransactionDateMother.tomorrow(),
+                TransactionAmountMother.random(10,1000), TransactionFeeMother.create(3.18),
+                TransactionDescriptionMother.random()
+        );
+    }
 }

@@ -8,6 +8,6 @@ CREATE TABLE transactions (
 );
 
 CREATE TABLE accounts (
-    iban VARCHAR(255) NOT NULL,
+    iban VARCHAR(255) NOT NULL PRIMARY KEY,
     balance NUMERIC(19,2) NOT NULL
 )

@@ -14,6 +14,7 @@ import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest(classes = {TransactionCreator.class, AccountFinder.class, AccountUpdater.class})
+@ActiveProfiles("test")
 public class TransactionCreatorShould {
 
     @MockBean
@@ -83,6 +85,7 @@ public class TransactionCreatorShould {
         });
 
         // THEN
+        verify(repository, never()).create(any(Transaction.class));
         assertEquals(expectedError, e.getMessage(), "Error message should be the expected");
     }
 
@@ -98,6 +101,7 @@ public class TransactionCreatorShould {
         });
 
         // THEN
+        verify(repository, never()).create(any(Transaction.class));
         assertEquals(expectedError, e.getMessage(), "Error message should be the expected");
 
     }

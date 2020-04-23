@@ -13,7 +13,7 @@
         WHERE a.IBAN = #{iban.value}
     </select>
 
-    <select id="findAll">
+    <select id="findAll" resultMap="accountResultMap">
         <include refid="selectAccount" />
     </select>
 

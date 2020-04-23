@@ -15,16 +15,23 @@ import java.time.OffsetDateTime;
 @RequiredArgsConstructor
 public final class TransactionResponse {
 
+    @JsonProperty("reference")
     private final String reference;
 
     @JsonProperty("account_iban")
     private final String accountIban;
 
+    @JsonProperty("date")
     @JsonSerialize(using = CustomOffsetDateTimeSerializer.class)
     private final OffsetDateTime date;
 
+    @JsonProperty("amount")
     private final Double amount;
+
+    @JsonProperty("fee")
     private final Double fee;
+
+    @JsonProperty("description")
     private final String description;
 
     public static TransactionResponse fromTransaction(Transaction transaction) {

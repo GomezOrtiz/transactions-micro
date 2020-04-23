@@ -8,11 +8,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.util.Collection;
+
 @Service
 @RequiredArgsConstructor
 public final class AccountFinder {
 
     private final AccountRepository repository;
+
+    public Collection<Account> findAll() {
+        return repository.findAll();
+    }
 
     public Account find(AccountIban iban) {
         Assert.notNull(iban, "Iban cannot be empty");

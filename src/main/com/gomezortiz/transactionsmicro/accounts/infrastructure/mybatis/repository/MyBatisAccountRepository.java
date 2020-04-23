@@ -10,6 +10,7 @@ import com.gomezortiz.transactionsmicro.transactions.domain.model.Transaction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @Repository
@@ -17,6 +18,11 @@ import java.util.Optional;
 public class MyBatisAccountRepository implements AccountRepository {
 
     private final MyBatisAccountMapper mapper;
+
+    @Override
+    public Collection<Account> findAll() {
+        return mapper.findAll();
+    }
 
     @Override
     public Optional<Account> findByIban(AccountIban iban) {
